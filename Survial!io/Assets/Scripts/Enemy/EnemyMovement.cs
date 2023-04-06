@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     public float _speed = 1f;
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
-    public Rigidbody2D _target;
+    private Rigidbody2D _target;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    private void OnEnable()
+    {
+        _target = GameManager.Instance.Player.GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {

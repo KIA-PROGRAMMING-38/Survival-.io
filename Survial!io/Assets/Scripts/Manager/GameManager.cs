@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
-    public PlayerMovement _player;  
+    public static GameManager Instance;
+    public PlayerMovement Player;
+    public PoolManager Pool;
 
     private void Awake()
     {
-        _instance = this;
+        Instance = this;
     }
 }

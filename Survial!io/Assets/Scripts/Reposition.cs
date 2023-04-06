@@ -30,11 +30,11 @@ public class Reposition : MonoBehaviour
             case "Map":
                 if (distanceX > distanceY) // 두 오브젝트 거리 차이에서 x축이 y축보다 크면 수평 이동
                 {                    
-                    transform.Translate(Vector3.right * directionX * 16); // 64는 맵 크기
+                    transform.Translate(Vector3.right * directionX * 64); // 64는 맵 크기
                 }
                 else if (distanceX < distanceY) // 두 오브젝트 거리 차이에서 y축보다 x축이 크면 수직 이동
                 {                 
-                    transform.Translate(Vector3.up * directionY * 16);
+                    transform.Translate(Vector3.up * directionY * 64);
                 }
                 break;
         }

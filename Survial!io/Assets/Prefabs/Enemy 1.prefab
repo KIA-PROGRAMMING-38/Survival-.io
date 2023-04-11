@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6722776577256500275}
   - component: {fileID: 6722776577256500236}
   - component: {fileID: 3597647705852526597}
-  - component: {fileID: 2329221601696170704}
+  - component: {fileID: 5788683162060922402}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2042000444, guid: 3cb6b2de8829504489e7f070b450f998, type: 3}
+  m_Sprite: {fileID: -1430222612, guid: 3cb6b2de8829504489e7f070b450f998, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 6722776577256500278}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cd916355ae83b754686fd03dfc52a106, type: 2}
+  m_Controller: {fileID: 9100000, guid: bb84622c38045864a97bfa1b9707c776, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -144,8 +144,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06739092, y: 0.008790135}
-  m_Size: {x: 0.6, y: 1}
+  m_Offset: {x: 0.029461503, y: -0.02517116}
+  m_Size: {x: 0.5723276, y: 0.9018897}
   m_Direction: 0
 --- !u!114 &3597647705852526597
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
---- !u!111 &2329221601696170704
+--- !u!111 &5788683162060922402
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ Animation:
   m_GameObject: {fileID: 6722776577256500278}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 12a6feee4f37bb3408703d7fda692c4e, type: 2}
+  m_Animation: {fileID: 7400000, guid: 22d06f904ecf9a14aab76041974fc10b, type: 2}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -185,7 +185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6722776578075401194}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

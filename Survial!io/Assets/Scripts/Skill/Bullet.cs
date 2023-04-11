@@ -19,11 +19,13 @@ public class Bullet : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
+
     private void Start()
     {
         Initialize();
         Move();
     }
+
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
@@ -34,6 +36,7 @@ public class Bullet : MonoBehaviour
             Deactivate();
         }
     }
+
     private void Initialize()
     {
         _rigidbody.gravityScale = 0;
@@ -41,6 +44,7 @@ public class Bullet : MonoBehaviour
         RigidbodyConstraints2D constraints = RigidbodyConstraints2D.FreezeRotation;
         _rigidbody.constraints = constraints;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -48,6 +52,7 @@ public class Bullet : MonoBehaviour
             Deactivate();
         }
     }
+
     private void Move()
     {
         Transform bullet;

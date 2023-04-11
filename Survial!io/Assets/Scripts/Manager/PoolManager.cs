@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    // 프리펩 저장
     public GameObject[] Prefabs;
+
+    // 각 프리펩을 담을 풀
     List<GameObject>[] pools;
 
     private void Awake()
@@ -29,7 +32,7 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        if (select == null)
+        if (!select)
         {
             select = Instantiate(Prefabs[index], transform);
             pools[index].Add(select);

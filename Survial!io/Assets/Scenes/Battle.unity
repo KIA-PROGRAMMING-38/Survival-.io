@@ -485,6 +485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1311369296}
   Pool: {fileID: 1662209914}
+  GameTime: 0
+  MaxGameTime: 20
 --- !u!4 &473484186
 Transform:
   m_ObjectHideFlags: 0
@@ -620,7 +622,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4.004464
+  orthographic size: 3.924107
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1455,6 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefabs:
   - {fileID: 6722776578075401193, guid: 419d5c7b7cc98f74b89bd5970f9836cb, type: 3}
+  - {fileID: 6722776578075401193, guid: ed0a23027ebe5954aacfad437835e331, type: 3}
 --- !u!4 &1662209915
 Transform:
   m_ObjectHideFlags: 0

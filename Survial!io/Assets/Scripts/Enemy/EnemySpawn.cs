@@ -18,8 +18,7 @@ public class EnemySpawn : MonoBehaviour
         _phase = Mathf.FloorToInt(GameManager.Instance.GameTime / (GameManager.Instance.MaxGameTime / 3)); // 소수점을 버리고 게임 시작 이후 3단계의 페이즈 구성
         if (_timer > (_phase == 0 ? 0.7f : 0.3f)) // phase 0에서는 0.7초 간격으로 spawn, 그 이상에서는 0.3f 간격으로 spawn, phase 2는 향후 추가 개발
         {
-            _timer = 0f;
-            Debug.Log($"{_phase}");
+            _timer = 0f;            
             Spawn();
         }
     }

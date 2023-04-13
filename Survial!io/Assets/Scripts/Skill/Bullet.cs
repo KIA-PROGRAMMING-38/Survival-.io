@@ -1,3 +1,4 @@
+using Assets.Scripts.Skill;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,31 +6,35 @@ using UnityEngine.Pool;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 _moveDirection;
-    private float _speed;
+    public ObjectPool<Bullet> BulletPool { private get; set; }
+    public BulletStat Stat = new BulletStat();     
+    private Vector3 _moveDirection;
+    private float _speed = 1.5f;
     private float _elapsedTime;
     private float _activateTime = 1f;
     private Transform _target;
-    // range를 어떻게 설정해 줄 것인가 - 스킬 세부 구현에서 결정 
-
-    public ObjectPool<Bullet> Pool { private get; set; }
-
+    private Transform _transform;
     private Rigidbody2D _rigidbody;
+    private SpriteRenderer _renderer;
+
+    public IBulletMovingPattern MovingPattern { private get; set; }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _transform = GetComponent<Transform>();
     }
 
     private void Start()
     {
-        Initialize();
-        Move();
+        Initialize();        
     }
 
     private void Update()
-    {
+    {        
+        
         _elapsedTime += Time.deltaTime;
-
         if (_elapsedTime >= _activateTime)
         {
             _elapsedTime = 0f;
@@ -43,8 +48,11 @@ public class Bullet : MonoBehaviour
 
         RigidbodyConstraints2D constraints = RigidbodyConstraints2D.FreezeRotation;
         _rigidbody.constraints = constraints;
-    }
 
+        _renderer.sprite = Stat.Sprite;
+        
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
@@ -54,18 +62,13 @@ public class Bullet : MonoBehaviour
     }
 
     private void Move()
-    {
-        Transform bullet;
-        bullet = GetComponent<Transform>();
-        _moveDirection = transform.forward;
-        _speed = 3f;
-        bullet.Translate(_moveDirection * _speed, Space.World);
-        
+    {        
+        MovingPattern.Do(Stat, _rigidbody);
     }
 
     private void Deactivate()
     {
         gameObject.SetActive(false);
-        Pool.Release(this);
+        BulletPool.Release(this);
     }
 }

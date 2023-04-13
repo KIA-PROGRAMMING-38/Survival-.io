@@ -14,7 +14,7 @@ public class Skill : MonoBehaviour
     private int _bulletCount;
     private string _description;
 
-    private float _totalSkillDamage; // 이거를 불릿에 전달해서 계산해야 하는데
+    private float _totalSkillDamage;
 
     [SerializeField]
     private Bullet _bullet; // 인스펙터에서 bullet prefab 설정 필요 

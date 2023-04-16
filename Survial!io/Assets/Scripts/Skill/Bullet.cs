@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     private Vector3 _moveDirection;
     private float _speed = 1.5f;
     private float _elapsedTime;
-    private float _activateTime = 1f;
+    private float _activateTime = 3f;
     private Transform _target;
     private Transform _transform;
     private Rigidbody2D _rigidbody;

@@ -26,7 +26,7 @@ public class EnemySpawn : MonoBehaviour
     private void Spawn()
     {
         // 각 position을 가지고 있는 부모 오브젝트의 좌표를 플레이어 좌표와 동일하게 하여 어느 위치에서나 동일한 범위 고정
-        transform.position = GameManager.Instance.Player.transform.position; 
+        transform.position = GameManager.Instance.Player.GetComponent<Transform>().position; 
 
         GameObject enemy = GameManager.Instance.Pool.Get(_phase); // phase에 따라 몬스터 풀에서 가져올 몬스터가 달라짐
         enemy.transform.position = _spawnPosition[Random.Range(1, _spawnPosition.Length)].position;        

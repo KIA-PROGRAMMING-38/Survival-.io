@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator _processTimerCoroutine;
 
     public static GameManager Instance;
-    public PlayerMovement Player;
+    public Player Player;
     public PoolManager Pool;
     public float GameTime;
     public float MaxGameTime = 3 * 60f; // 3 minutes for each stage

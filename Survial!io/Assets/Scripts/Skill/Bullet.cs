@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     private Transform _target;
     private Transform _transform;
     private Rigidbody2D _rigidbody;
-    private SpriteRenderer _renderer;
+    private SpriteRenderer _renderer;    
 
     public IBulletMovingPattern MovingPattern { private get; set; }
 
@@ -53,17 +53,23 @@ public class Bullet : MonoBehaviour
         
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D target)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            Deactivate();
+        if (target.CompareTag("Enemy"))
+        {            
+            Hit(target);            
         }
     }
 
     private void Move()
     {        
         MovingPattern.Do(Stat, _rigidbody);
+    }
+
+    private void Hit(Collider2D target)
+    {        
+        IDamagable targetObject = target.gameObject.GetComponent<IDamagable>();        
+        targetObject.TakeDamage(Stat.CurrentBulletDamage);
     }
 
     private void Deactivate()

@@ -21,7 +21,7 @@ public class Reposition : MonoBehaviour
         float distanceX = Mathf.Abs(areaPosition.x - playerPosition.x);
         float distanceY = Mathf.Abs(areaPosition.y - playerPosition.y);
 
-        Vector3 playerDirection = GameManager.Instance.Player._inputVec;
+        Vector3 playerDirection = GameManager.Instance.Player.Direction;
         float directionX = playerDirection.x < 0 ? -1 : 1;
         float directionY = playerDirection.y < 0 ? -1 : 1;
 

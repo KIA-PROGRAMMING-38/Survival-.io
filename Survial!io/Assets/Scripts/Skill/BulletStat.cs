@@ -1,6 +1,4 @@
-﻿
-using Assets.Scripts.Skill;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletStat
 {
@@ -13,4 +11,3 @@ public class BulletStat
     public int Count;
     public Sprite Sprite;
 }
-

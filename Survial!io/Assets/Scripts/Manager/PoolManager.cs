@@ -1,43 +1,36 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PoolManager : MonoBehaviour
 {
-    // 프리펩 저장
-    public GameObject[] Prefabs;
+    private GameManager _gameManager;
 
-    // 각 프리펩을 담을 풀
-    List<GameObject>[] pools;
+    public GameManager GameManager
+    {
+        private get => _gameManager;
+        set
+        {
+            _gameManager = value;            
+        }
+    }
+
+    public EnemyPool EnemyPool;
+    public Enemy TestPrefab;
+
+    public ItemPool ItemPool;
+    public Item ItemPrefab;
 
     private void Awake()
     {
-        pools = new List<GameObject>[Prefabs.Length];
-        for (int i = 0; i < Prefabs.Length; ++i)
-        {
-            pools[i] = new List<GameObject>();
-        }
+        TestPrefab = Resources.Load<Enemy>("Prefab/Enemy");
+        EnemyPool = new EnemyPool();
+        EnemyPool.Init(0,TestPrefab);
+
+        ItemPrefab = Resources.Load<Item>("Prefab/Item");
+        ItemPool = new ItemPool();
+        ItemPool.Init(ItemPrefab);
     }
-    public GameObject Get(int index)
-    {
-        GameObject select = null;
 
-        foreach (GameObject item in pools[index])
-        {
-            if (item.activeSelf == false)
-            {
-                select = item;
-                select.SetActive(true);
-                break;
-            }
-        }
 
-        if (!select)
-        {
-            select = Instantiate(Prefabs[index], transform);
-            pools[index].Add(select);
-        }
-
-        return select;
-    }
 }

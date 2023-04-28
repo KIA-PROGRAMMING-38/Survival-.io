@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private float _speed = 3f; // test value < 스탯 데이터 받아올 것
+    private float _speed = CharacterStat.DEFAULT_SPEED; // test value < 스탯 데이터 받아올 것
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     IMovable character;    
@@ -13,19 +13,20 @@ public class Movement : MonoBehaviour
     private Vector2 _directionVector;
     private Vector2 _movingRouteVector;
     private bool _isFacingDirection;
-        
+
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        character = GetComponent<IMovable>();    
+        character = GetComponentInParent<IMovable>();    
     }      
 
     private void FixedUpdate()
     {
-        _directionVector = character.Direction;
+        _directionVector = character.Direction;        
         _currentPosition = _rigidbody.position;
-        _movingRouteVector = _directionVector * _speed * Time.fixedDeltaTime;
+        _movingRouteVector = _directionVector * _speed * Time.fixedDeltaTime;        
         _rigidbody.MovePosition(_currentPosition + _movingRouteVector);
         
         if (_directionVector.x != 0) // 좌우 입력이 들어올 때만 체크
@@ -39,3 +40,26 @@ public class Movement : MonoBehaviour
         _spriteRenderer.flipX = _isFacingDirection;        
     }
 }
+
+//public class EnemyMovement : MonoBehaviour
+//{
+//    public float _speed = 1f;
+//    private Rigidbody2D _rigidbody;
+//    private SpriteRenderer _spriteRenderer;
+//    private Rigidbody2D _target;
+//    private void Awake()
+//    {
+//        _rigidbody = GetComponent<Rigidbody2D>();
+//        _spriteRenderer = GetComponent<SpriteRenderer>();
+//    }
+//    private void OnEnable()
+//    {
+//        _target = GameManager.Instance.Player.GetComponent<Rigidbody2D>();
+//    }
+//    private void FixedUpdate()
+//    {
+//        Vector2 directionVector = _target.position - _rigidbody.position;
+//        Vector2 nextVector = directionVector * _speed * Time.fixedDeltaTime;
+//        _rigidbody.MovePosition(_rigidbody.position + nextVector);        
+//    }
+

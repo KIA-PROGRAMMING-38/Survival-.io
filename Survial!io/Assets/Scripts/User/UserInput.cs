@@ -11,8 +11,9 @@ public class UserInput : MonoBehaviour
 
     private void Update()
     {
-        MoveInput();        
+        MoveInput();
     }
+
     public void MoveInput()
     {
         Horizontal = Input.GetAxis("Horizontal");

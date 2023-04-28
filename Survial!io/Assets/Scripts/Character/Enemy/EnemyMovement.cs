@@ -9,7 +9,6 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _target;
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -28,5 +27,10 @@ public class EnemyMovement : MonoBehaviour
     private void LateUpdate()
     {
         _spriteRenderer.flipX = _target.position.x < _rigidbody.position.x;
+    }
+
+    public void SpawnItem()
+    {        
+         
     }
 }

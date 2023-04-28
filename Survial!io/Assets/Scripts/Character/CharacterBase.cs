@@ -1,30 +1,28 @@
+using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public abstract class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : MonoBehaviour, IDamagable, IMovable
+    // It is 'Player' or 'Enemy'.
 {
-    protected CharacterStat baseStat = new CharacterStat();
+    protected CharacterStat baseStat = new CharacterStat();    
     protected int currentHealth;
-    protected float speed;
     protected const int DEFAULT_SPEED = 1; // ÀÓ½Ã °ª
-    
+
+    public virtual event Action<DamagableObject> OnTakeDamage;
+    public virtual event Action<DamagableObject> OnDead;
+
+    public Vector2 Direction { get; set; }
+    public float Speed { get; set; }
+
     protected virtual void OnEnable()
     {
         currentHealth = baseStat.MaxHP;
-        speed = baseStat.Speed * DEFAULT_SPEED;
+        Speed = baseStat.Speed * DEFAULT_SPEED;
+        
     }
-
-    public virtual void Move()
-    {
-
-    }
-
-    public virtual void OnTakeDamage()
-    {
-
-    }
-
-    public virtual void Died()
-    {
-
-    }
+    
+    public abstract void Move();
+    public abstract void TakeDamage(float damageAmount, GameObject attacker = null);
+    public abstract void Dead();
 }

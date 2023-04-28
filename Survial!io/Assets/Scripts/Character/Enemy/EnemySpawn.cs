@@ -1,35 +1,64 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class EnemySpawn : MonoBehaviour
-{
-    private Transform[] _spawnPosition;
-    private int _phase;
-    
-    private void Awake()
+// EnemySpawnPoints의 컴포넌트, 자식 오브젝트들의 position이 각각의 point
+{    
+    private EnemyManager _enemyManager;
+    public EnemyManager EnemyManager
     {
-        _spawnPosition = GetComponentsInChildren<Transform>();
+        private get => _enemyManager;
+        set => _enemyManager = value;
     }
     
-    private float _timer;
+    private int _phase;
+    private float _currentGameTime;
+    private float _currentWaveTime;
+    private float _phaseTime;
+    private Vector2 _player;
+    private Transform _spawnPositionCenter;
+    private Vector2 _spawnPosition;
+    private int _inRandomIndex;
+    private IEnumerator _spawnCoroutine;
+    private WaitForSeconds _waitForSpawnTime;    
+    private Transform[] _spawnPoints;
+
+    private void Start()
+    {
+        _phaseTime = 60f;
+        _currentWaveTime = 0;
+        _waitForSpawnTime = new WaitForSeconds(1); // test        
+        _spawnPoints = GetComponentsInChildren<Transform>();
+        GameManager.Instance.StageManager.SpawnPoints = _spawnPoints;
+        _spawnPositionCenter = GetComponent<Transform>();
+    }
     private void Update()
     {
-        _timer += Time.deltaTime;
-        _phase = Mathf.FloorToInt(GameManager.Instance.GameTime / (GameManager.Instance.MaxGameTime / 3)); // 소수점을 버리고 게임 시작 이후 3단계의 페이즈 구성
-        if (_timer > (_phase == 0 ? 0.7f : 0.3f)) // phase 0에서는 0.7초 간격으로 spawn, 그 이상에서는 0.3f 간격으로 spawn, phase 2는 향후 추가 개발
+        _player = GameManager.Instance.Player.GetComponent<Transform>().position;
+        _spawnPositionCenter.position = _player;
+        EnemyPool TestEnemyPool = GameManager.Instance.PoolManager.EnemyPool; // test       
+        _spawnCoroutine = Spawn(_spawnPoints, TestEnemyPool);
+        if (_currentWaveTime == 0)
         {
-            _timer = 0f;            
-            Spawn();
+            StartCoroutine(_spawnCoroutine);
         }
+        _currentWaveTime += Time.deltaTime;
     }
 
-    private void Spawn()
+    private IEnumerator Spawn(Transform[] spawnPositions, EnemyPool enemyPool)
     {
-        // 각 position을 가지고 있는 부모 오브젝트의 좌표를 플레이어 좌표와 동일하게 하여 어느 위치에서나 동일한 범위 고정
-        transform.position = GameManager.Instance.Player.GetComponent<Transform>().position; 
+        while (_currentWaveTime < _phaseTime)
+        {
+            Enemy enemyInstance = enemyPool.GetEnemyFromPool(); // phase 별로 다른 인스턴스 뽑아야함
+            _inRandomIndex = UnityEngine.Random.Range(0, spawnPositions.Length);
+            _spawnPosition = spawnPositions[_inRandomIndex].position;
+            enemyInstance.transform.position = _spawnPosition;
 
-        GameObject enemy = GameManager.Instance.Pool.Get(_phase); // phase에 따라 몬스터 풀에서 가져올 몬스터가 달라짐
-        enemy.transform.position = _spawnPosition[Random.Range(1, _spawnPosition.Length)].position;        
+            yield return _waitForSpawnTime;
+        }
+        StopCoroutine(_spawnCoroutine);
+        
     }
-
 }

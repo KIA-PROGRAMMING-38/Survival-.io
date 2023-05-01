@@ -21,11 +21,10 @@ public class Rotator : MonoBehaviour
 
     private void Start()
     {
-        _pointTransform = GameManager.Instance.Player.transform;
-        
+        _pointTransform = GameManager.Instance.Player.transform;        
     }
 
-    void Update()
+    private void Update()
     {        
         Move();
     }

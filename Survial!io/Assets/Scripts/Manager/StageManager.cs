@@ -24,4 +24,11 @@ public class StageManager : MonoBehaviour
         get => _spawnPoints;
         set => _spawnPoints = value;
     }
+    private Transform[] _boxSpawnPoints;
+    public Transform[] BoxSpawnPoints
+    {
+        get => _boxSpawnPoints;
+        set => _boxSpawnPoints = value;
+    }
+        
 }

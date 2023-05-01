@@ -21,15 +21,24 @@ public class PoolManager : MonoBehaviour
     public ItemPool ItemPool;
     public Item ItemPrefab;
 
+    public ItemPool EXPPool;
+    public Item EXPPrefab;
+
+    public ItemPool BoxPool;
+    public Item BoxPrefab;
     private void Awake()
     {
-        TestPrefab = Resources.Load<Enemy>("Prefab/Enemy");
+        TestPrefab = Resources.Load<Enemy>("Prefab/Enemy");        
         EnemyPool = new EnemyPool();
         EnemyPool.Init(0,TestPrefab);
 
-        ItemPrefab = Resources.Load<Item>("Prefab/Item");
-        ItemPool = new ItemPool();
-        ItemPool.Init(ItemPrefab);
+        EXPPrefab = Resources.Load<Item>("Prefab/EXP");
+        EXPPool = new ItemPool();
+        EXPPool.Init(EXPPrefab);
+
+        BoxPrefab = Resources.Load<Item>("Prefab/Box");
+        BoxPool = new ItemPool();
+        BoxPool.Init(BoxPrefab);
     }
 
 

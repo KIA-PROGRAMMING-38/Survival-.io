@@ -7,10 +7,7 @@ public abstract class CharacterBase : MonoBehaviour, IDamagable, IMovable
 {
     protected CharacterStat baseStat = new CharacterStat();    
     protected int currentHealth;
-    protected const int DEFAULT_SPEED = 1; // ÀÓ½Ã °ª
-
-    public virtual event Action<DamagableObject> OnTakeDamage;
-    public virtual event Action<DamagableObject> OnDead;
+    protected const int DEFAULT_SPEED = 1;
 
     public Vector2 Direction { get; set; }
     public float Speed { get; set; }
@@ -18,8 +15,7 @@ public abstract class CharacterBase : MonoBehaviour, IDamagable, IMovable
     protected virtual void OnEnable()
     {
         currentHealth = baseStat.MaxHP;
-        Speed = baseStat.Speed * DEFAULT_SPEED;
-        
+        Speed = baseStat.Speed * DEFAULT_SPEED;        
     }
     
     public abstract void Move();

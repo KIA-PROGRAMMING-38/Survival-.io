@@ -11,8 +11,7 @@ public class Enemy : CharacterBase // 현재 move 이상없이 동작
     private Rigidbody2D _rigidbody;
     private Rigidbody2D _player;
     private Health _health;
-    private ItemSpawn _itemSpawn;
-    private Vector2 _targetPosition;
+    private ItemSpawn _itemSpawn;    
     public event Action<Enemy> OnTakeDamage;
     public event Action<Enemy> OnDead;
     private void Awake()
@@ -63,8 +62,8 @@ public class Enemy : CharacterBase // 현재 move 이상없이 동작
         // Animator >> 죽음 애니메이션으로 전환
         // UI >> 처치한 몬스터 카운트 증가
         // ItemSpawn >> Enemy 넘겨 넘기면 거기서 좌표 뽑고 실행
-        
+
         OnDead?.Invoke(this);
-        
+
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Map
   - SpawnPosition
   - Enemy
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Item
   - Skill
   - Enemy
-  - 
+  - Box
   - 
   - 
   - 

@@ -1,3 +1,4 @@
+using Assets.Scripts.Skill;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "Data/SkillData")]
 public class SkillData : ScriptableObject
@@ -7,12 +8,12 @@ public class SkillData : ScriptableObject
     public int SkillId;
     public float CooldownTime;
     public string[] SkillDescriptions;
-    // skillsprite 추가 필요
+    public Sprite UISprite;    
 
     [Header("Bullet Data")]
-    // bullet move pattern 추가해야함
     // range 추가 필요
     public Sprite Sprite;
+    public IBulletMovingPattern BulletMovingPattern;
     public string Target;
     public int[] Counts;
     public float[] DamagePerBullet;

@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class Item : MonoBehaviour, IPickable
+public abstract class Item : MonoBehaviour
 {
     protected Vector2 createPosition;
     protected Player player;
     public ObjectPool<Item> ItemPool { private get; set; }
 
     private void Awake()
-    {
-        ItemPool = GameManager.Instance.PoolManager.ItemPool.ItemPoolInstance;
+    {        
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -35,7 +35,7 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
 
     private void InitiateSkill()
     {
-        _currentSkill = "Guardian";
+        _currentSkill = SkillName.KUNAI;
         // 플레이어가 UI를 통해 선택한 스킬 정보를 받아와야 함
         // 스킬 레벨업 시스템 반영시 로직 구현 필요
 
@@ -52,7 +52,7 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
     {
         _elapsedTime += Time.deltaTime;
         _cooldownTime = _skillData.CooldownTime;
-        
+
         if (_elapsedTime >= _cooldownTime)
         {
             _elapsedTime = 0f;
@@ -68,10 +68,10 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
     private void SetBullet(Bullet bullet, int id)
     {
         // 발사체에게 데이터 테이블에서 자료를 가져와 정보를 넘기는 부분
-        SetPosition(bullet, id);
-        SetMovingPattern(bullet);
-        SetDamage(bullet);
         SetCurrentLevelBullet(bullet, _level);
+        SetPosition(bullet, id);
+        SetMovingPattern(bullet, _skillData);
+        SetDamage(bullet);
     }
 
     private Bullet GetBulletFromPool()
@@ -105,28 +105,27 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
         _description = _skillData.SkillDescriptions[level];
         _bulletCount = _skillData.Counts[level];
     }
-    
+
     // functions for bullets
-    private void SetMovingPattern(Bullet bullet)
+    private void SetMovingPattern(Bullet bullet, SkillData skillData)
     {
-        // 비행 방법 전달 새로운 스킬 구현 시 스킬 정보에서 pattern을 받아와 switch문으로 적용 필요
-        // 각각 비행 방법에 대한 컴포넌트를 가지고 있고 해당 컴포넌트를 켜는 방식으로.        
+        if (bullet.GetComponent<MoveStraight>() == null)
+        bullet.AddComponent<MoveStraight>();        
     }
 
     private void SetPosition(Bullet bullet, int id)
     {
-        // 발사체 초기 위치 결정
         bullet.transform.SetParent(this.transform);
     }
     private void SetDamage(Bullet bullet)
     {
-        // 여기에 플레이어 스테이터스 적용 시 player의 atk과 곱하기 
+        // After implement 'UserStat', multiply 'UserStat.Atk'
         bullet.Stat.CurrentBulletDamage = _skillData.DamagePerBullet[_level];
     }
 
     private void SetCurrentLevelBullet(Bullet bullet, int level)
     {
-        bullet.Stat.BulletSpeed = _skillData.BulletSpeed[level];       
+        bullet.Stat.BulletSpeed = _skillData.BulletSpeed[level];
         bullet.Stat.Count = _skillData.Counts[level];
     }
 }

@@ -5,32 +5,32 @@ using UnityEngine.Pool;
 public
     class ItemSpawn : MonoBehaviour
 {
-    private Vector2 _spawnPosition;
+    private Vector2 _spawnPosition;   
     public Item _item;
     private ItemPool _itemPool;
+    private ItemPool _expPool;    
 
-    private void Awake()
+    private void Start()
     {
         _itemPool = GameManager.Instance.PoolManager.ItemPool;
+        _expPool = GameManager.Instance.PoolManager.EXPPool;     
+    }
+
+    private void Update()
+    {        
+
     }
 
     public void SpawnExp(Enemy enemy)
     {
-        EXP exp = (EXP)_itemPool.GetItemFromItemPool();
+        EXP exp = (EXP)_expPool.GetItemFromItemPool();        
         Transform enemyTransform = enemy.transform.GetChild(0);
         _spawnPosition = enemyTransform.position;
         exp.transform.position = _spawnPosition;
     }
-    private void SpawnInGameItem()
+    
+    public void SpawnInGameItem(Box box)
     {
-        // 박스 및 InGameItem 기능 구현 시 추가 될 부분
-    }
-    private Item CreateItem()
-    {
-        Item item = Instantiate(_item);
-        item.ItemPool = _itemPool.ItemPoolInstance;
-        return item;
-    }
-
-    private void TakeItemFromPool(Item item) => item.gameObject.SetActive(true);
+        Debug.Log("item");
+    }    
 }

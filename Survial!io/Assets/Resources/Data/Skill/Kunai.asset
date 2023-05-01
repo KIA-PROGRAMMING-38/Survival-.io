@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c909121b146f5894e842e9187c681755, type: 3}
+  m_Name: Kunai
+  m_EditorClassIdentifier: 
+  SkillName: Kunai
+  SkillId: 2
+  CooldownTime: 1
+  SkillDescriptions:
+  - "\uC790\uB3D9 \uC870\uC900\uC73C\uB85C \uC801\uC744 \uACF5\uACA9\uD558\uBA70
+    \uC720\uB839 \uC218\uB9AC\uAC80\uC73C\uB85C \uB9CC\uB4E4\uBA74 \uACC4\uC18D\uD574\uC11C
+    \uC801\uC5D0\uAC8C \uC218\uB9AC\uAC80\uC744 \uB0A0\uB824 \uACF5\uACA9\uD55C\uB2E4."
+  - "\uCFE0\uB098\uC774 1\uAC1C \uC99D\uAC00, \uD53C\uD574\uB7C9 \uC99D\uAC00"
+  - "\uCFE0\uB098\uC774 1\uAC1C \uC99D\uAC00, \uD53C\uD574\uB7C9 \uC99D\uAC00"
+  - "\uCFE0\uB098\uC774 1\uAC1C \uC99D\uAC00, \uD53C\uD574\uB7C9 \uC99D\uAC00"
+  - "\uCFE0\uB098\uC774 1\uAC1C \uC99D\uAC00, \uD53C\uD574\uB7C9 \uC99D\uAC00"
+  UISprite: {fileID: 0}
+  Sprite: {fileID: 0}
+  Target: Enemy
+  Counts: 0100000002000000030000000400000005000000
+  DamagePerBullet:
+  - 1.5
+  - 2
+  - 3
+  - 4
+  - 5.6
+  BulletSpeed:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10

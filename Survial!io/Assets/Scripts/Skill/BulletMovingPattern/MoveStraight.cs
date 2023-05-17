@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class MoveStraight : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MoveStraight : MonoBehaviour
     private Vector2 _targetPosition;
     private Transform _player;
     private Vector2 _playerPosition;
+    private Vector2 _direction;
     private Bullet _bullet;
 
     private void Awake()
@@ -16,9 +18,9 @@ public class MoveStraight : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _player = GameManager.Instance.Player.transform;
         _bullet = GetComponent<Bullet>();
-        Speed = _bullet.Speed;
+        _speed = _bullet.Speed;
     }
-    private void Update()
+    private void OnEnable()
     {
         Move();
     }
@@ -26,9 +28,17 @@ public class MoveStraight : MonoBehaviour
     public void Move()
     {
         _target = _player.GetComponentInChildren<Sensor>().SearchTarget();// 플레이어 sensor에서 감지된 타겟을 가져와야함.
-        _targetPosition = _target.position;
+          
+        _targetPosition = _target.position;        
         _playerPosition = _player.position;
-        _rigidbody.velocity = (_targetPosition - _playerPosition).normalized * _speed;
+
+        _direction = (_targetPosition - _playerPosition).normalized;
+        Debug.Log(_direction);
+        
+        if (_direction == Vector2.zero)
+            _direction = Vector2.up;
+        _rigidbody.velocity = _direction * _speed;
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, _direction);
     }
 
 }

@@ -1,4 +1,3 @@
-using Assets.Scripts.Skill;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,7 +9,7 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
     private protected SkillData _skillData;
     private float _elapsedTime;
     private float _cooldownTime;
-    private int _level = -1; // index로 사용하기 위해 level1 = 0이 되기 위한 초기화
+    private int _level = -1; // index로 들어가 level1 = 0이 되기 위한 초기화
     private string _currentSkill;
     private int _bulletCount;
     private string _description;
@@ -110,12 +109,14 @@ public class Skill : MonoBehaviour // Acting like BulletSpawner
     private void SetMovingPattern(Bullet bullet, SkillData skillData)
     {
         if (bullet.GetComponent<MoveStraight>() == null)
-        bullet.AddComponent<MoveStraight>();        
+        bullet.AddComponent<MoveStraight>();
+        
     }
 
     private void SetPosition(Bullet bullet, int id)
     {
         bullet.transform.SetParent(this.transform);
+        bullet.transform.localPosition = Vector2.zero;    
     }
     private void SetDamage(Bullet bullet)
     {

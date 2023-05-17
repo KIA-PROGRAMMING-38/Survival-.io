@@ -53,16 +53,16 @@ public class Player : CharacterBase, IMovable
         // 유저 아이템 기능 추가 시 유저 아이템의 스피드 반영하여 계산.
         // 게임 중 speed가 바뀌는 경우는 유저가 게임 중 버프 스킬을 골랐을 때
     }
+    override public void Move()
+    {
+        SetDirection(); // 여기서 정한 direction으로 movement 컴포넌트 동작
+        OnMove();
+    }
     private void SetDirection()
     {
         Direction = _directionNormalized; // CharacterBase 상속 필드
         _inputVector.Set(_userInput.Horizontal, _userInput.Vertical);
         _directionNormalized = _inputVector.normalized;
-    }
-    override public void Move()
-    {
-        SetDirection(); // 여기서 정한 direction으로 movement 컴포넌트 동작
-        OnMove();
     }
     public void OnMove()
     {

@@ -1,4 +1,3 @@
-using Assets.Scripts.Skill;
 using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "Data/SkillData")]
 public class SkillData : ScriptableObject

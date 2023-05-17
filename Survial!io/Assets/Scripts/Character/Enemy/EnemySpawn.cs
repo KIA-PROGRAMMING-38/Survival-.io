@@ -16,7 +16,7 @@ public class EnemySpawn : MonoBehaviour
     private int _phase;
     private float _currentGameTime;
     private float _currentWaveTime;
-    private float _phaseTime;
+    private const float _phaseTime = 60f;
     private Vector2 _player;
     private Transform _spawnPositionCenter;
     private Vector2 _spawnPosition;
@@ -26,17 +26,16 @@ public class EnemySpawn : MonoBehaviour
     private Transform[] _spawnPoints;
 
     private void Start()
-    {
-        _phaseTime = 60f;
+    {        
         _currentWaveTime = 0;
         _waitForSpawnTime = new WaitForSeconds(1); // test        
         _spawnPoints = GetComponentsInChildren<Transform>();
         GameManager.Instance.StageManager.SpawnPoints = _spawnPoints;
-        _spawnPositionCenter = GetComponent<Transform>();
+        _spawnPositionCenter = gameObject.transform;
     }
     private void Update()
     {
-        _player = GameManager.Instance.Player.GetComponent<Transform>().position;
+        _player = GameManager.Instance.Player.transform.position;
         _spawnPositionCenter.position = _player;
         EnemyPool TestEnemyPool = GameManager.Instance.PoolManager.EnemyPool; // test       
         _spawnCoroutine = Spawn(_spawnPoints, TestEnemyPool);

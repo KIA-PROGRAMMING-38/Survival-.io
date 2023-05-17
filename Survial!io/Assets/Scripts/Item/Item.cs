@@ -13,7 +13,7 @@ public abstract class Item : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) // 모든 아이템은 플레이어와 충돌 시 효과 발생
+        if (collision.CompareTag(TagLiteral.PLAYER)) // 모든 아이템은 플레이어와 충돌 시 효과 발생
         {
             player = collision.GetComponent<Player>();
             Get();

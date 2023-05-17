@@ -1,4 +1,3 @@
-using Assets.Scripts.Skill;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
@@ -32,10 +31,17 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= _activateTime)
+        if (_elapsedTime >= _activateTime && gameObject.activeSelf == true)
         {
             _elapsedTime = 0f;
             Deactivate();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D target)
+    {        
+        if (target.CompareTag(TagLiteral.ENEMY) || target.CompareTag(TagLiteral.BOX)) 
+        {
+            Hit(target);
         }
     }
 
@@ -49,13 +55,6 @@ public class Bullet : MonoBehaviour
         _renderer.sprite = Stat.Sprite;
     }
 
-    private void OnTriggerEnter2D(Collider2D target)
-    {        
-        if (target.CompareTag("Enemy") || target.CompareTag("Box")) 
-        {
-            Hit(target);
-        }
-    }
 
     public void Move()
     {
@@ -66,10 +65,11 @@ public class Bullet : MonoBehaviour
     {
         Health targetObject = target.gameObject.GetComponent<Health>();
         targetObject.TakeDamage(Stat.CurrentBulletDamage);
+        Deactivate();
     }
 
     private void Deactivate()
-    {
+    {        
         gameObject.SetActive(false);
         BulletPool.Release(this);
     }
